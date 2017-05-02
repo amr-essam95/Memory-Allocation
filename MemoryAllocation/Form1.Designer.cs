@@ -31,11 +31,14 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.startingAddLabel = new System.Windows.Forms.Label();
-            this.sizeLabel = new System.Windows.Forms.Label();
-            this.startingAdd = new System.Windows.Forms.TextBox();
-            this.size = new System.Windows.Forms.TextBox();
+            this.save = new System.Windows.Forms.Button();
             this.addHole = new System.Windows.Forms.Button();
+            this.size = new System.Windows.Forms.TextBox();
+            this.startingAdd = new System.Windows.Forms.TextBox();
+            this.sizeLabel = new System.Windows.Forms.Label();
+            this.startingAddLabel = new System.Windows.Forms.Label();
+            this.clear = new System.Windows.Forms.Button();
+            this.list = new System.Windows.Forms.ListView();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +67,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.clear);
+            this.groupBox1.Controls.Add(this.save);
             this.groupBox1.Controls.Add(this.addHole);
             this.groupBox1.Controls.Add(this.size);
             this.groupBox1.Controls.Add(this.startingAdd);
@@ -71,19 +76,44 @@
             this.groupBox1.Controls.Add(this.startingAddLabel);
             this.groupBox1.Location = new System.Drawing.Point(53, 106);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(401, 218);
+            this.groupBox1.Size = new System.Drawing.Size(416, 286);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Holes Entry";
             // 
-            // startingAddLabel
+            // save
             // 
-            this.startingAddLabel.AutoSize = true;
-            this.startingAddLabel.Location = new System.Drawing.Point(6, 59);
-            this.startingAddLabel.Name = "startingAddLabel";
-            this.startingAddLabel.Size = new System.Drawing.Size(124, 13);
-            this.startingAddLabel.TabIndex = 0;
-            this.startingAddLabel.Text = "Starting Address of Hole:";
+            this.save.Location = new System.Drawing.Point(162, 212);
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(223, 23);
+            this.save.TabIndex = 3;
+            this.save.Text = "Save Holes and Proceed to Simulation";
+            this.save.UseVisualStyleBackColor = true;
+            this.save.Click += new System.EventHandler(this.save_Click);
+            // 
+            // addHole
+            // 
+            this.addHole.Location = new System.Drawing.Point(162, 165);
+            this.addHole.Name = "addHole";
+            this.addHole.Size = new System.Drawing.Size(75, 23);
+            this.addHole.TabIndex = 4;
+            this.addHole.Text = "Add Hole";
+            this.addHole.UseVisualStyleBackColor = true;
+            this.addHole.Click += new System.EventHandler(this.addHole_Click);
+            // 
+            // size
+            // 
+            this.size.Location = new System.Drawing.Point(162, 108);
+            this.size.Name = "size";
+            this.size.Size = new System.Drawing.Size(224, 20);
+            this.size.TabIndex = 3;
+            // 
+            // startingAdd
+            // 
+            this.startingAdd.Location = new System.Drawing.Point(162, 56);
+            this.startingAdd.Name = "startingAdd";
+            this.startingAdd.Size = new System.Drawing.Size(224, 20);
+            this.startingAdd.TabIndex = 2;
             // 
             // sizeLabel
             // 
@@ -94,38 +124,45 @@
             this.sizeLabel.TabIndex = 1;
             this.sizeLabel.Text = "Size of Hole:";
             // 
-            // startingAdd
+            // startingAddLabel
             // 
-            this.startingAdd.Location = new System.Drawing.Point(162, 56);
-            this.startingAdd.Name = "startingAdd";
-            this.startingAdd.Size = new System.Drawing.Size(224, 20);
-            this.startingAdd.TabIndex = 2;
+            this.startingAddLabel.AutoSize = true;
+            this.startingAddLabel.Location = new System.Drawing.Point(6, 59);
+            this.startingAddLabel.Name = "startingAddLabel";
+            this.startingAddLabel.Size = new System.Drawing.Size(124, 13);
+            this.startingAddLabel.TabIndex = 0;
+            this.startingAddLabel.Text = "Starting Address of Hole:";
             // 
-            // size
+            // clear
             // 
-            this.size.Location = new System.Drawing.Point(162, 108);
-            this.size.Name = "size";
-            this.size.Size = new System.Drawing.Size(224, 20);
-            this.size.TabIndex = 3;
+            this.clear.Location = new System.Drawing.Point(264, 165);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(122, 23);
+            this.clear.TabIndex = 5;
+            this.clear.Text = "Clear All Holes";
+            this.clear.UseVisualStyleBackColor = true;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
-            // addHole
+            // list
             // 
-            this.addHole.Location = new System.Drawing.Point(120, 169);
-            this.addHole.Name = "addHole";
-            this.addHole.Size = new System.Drawing.Size(75, 23);
-            this.addHole.TabIndex = 4;
-            this.addHole.Text = "Add Hole";
-            this.addHole.UseVisualStyleBackColor = true;
+            this.list.Location = new System.Drawing.Point(551, 35);
+            this.list.Name = "list";
+            this.list.Size = new System.Drawing.Size(242, 357);
+            this.list.TabIndex = 3;
+            this.list.UseCompatibleStateImageBehavior = false;
+            this.list.View = System.Windows.Forms.View.Details;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 481);
+            this.Controls.Add(this.list);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -145,6 +182,9 @@
         private System.Windows.Forms.TextBox startingAdd;
         private System.Windows.Forms.Label sizeLabel;
         private System.Windows.Forms.Label startingAddLabel;
+        private System.Windows.Forms.Button save;
+        private System.Windows.Forms.Button clear;
+        private System.Windows.Forms.ListView list;
     }
 }
 
