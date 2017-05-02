@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MemoryAllocation
 {
@@ -12,12 +14,14 @@ namespace MemoryAllocation
         int startingAddress;
         int Size;
         int number;
+        TextBox box = new TextBox();
 
         public Hole(int num,int starting ,int size)
         {
             startingAddress = starting;
             Size = size;
             number = num;
+            box.Size = new Size(size, 50);
         }
         public int getSize()
         {

@@ -36,6 +36,7 @@
             this.size = new System.Windows.Forms.TextBox();
             this.allocate = new System.Windows.Forms.Button();
             this.list = new System.Windows.Forms.ListView();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,6 +106,7 @@
             this.allocate.TabIndex = 2;
             this.allocate.Text = "Allocate";
             this.allocate.UseVisualStyleBackColor = true;
+            this.allocate.Click += new System.EventHandler(this.allocate_Click);
             // 
             // list
             // 
@@ -113,12 +115,22 @@
             this.list.Size = new System.Drawing.Size(167, 268);
             this.list.TabIndex = 2;
             this.list.UseCompatibleStateImageBehavior = false;
+            this.list.View = System.Windows.Forms.View.Details;
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Location = new System.Drawing.Point(65, 356);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(664, 227);
+            this.panel1.TabIndex = 3;
             // 
             // Simulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 481);
+            this.ClientSize = new System.Drawing.Size(784, 661);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.list);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
@@ -142,5 +154,6 @@
         private System.Windows.Forms.Label labelSize;
         private System.Windows.Forms.Label lableNumber;
         private System.Windows.Forms.ListView list;
+        private System.Windows.Forms.Panel panel1;
     }
 }

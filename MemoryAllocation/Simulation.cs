@@ -71,5 +71,31 @@ namespace MemoryAllocation
             }
                
         }
+
+        private void allocate_Click(object sender, EventArgs e)
+        {
+            if(allocate.Text == "Allocate")
+            {
+                // Case of allocation
+                int s;
+                try
+                {
+                    s = Convert.ToInt32(size.Text.ToString());
+                }
+                catch
+                {
+                    MessageBox.Show("Please enter a valid size");
+                    return;
+                }
+                Process temp = new Process(number.Text,s);
+                String[] row = { temp.getNumber(),temp.getSize().ToString() };
+                var listItemView = new ListViewItem(row);
+                list.Items.Add(listItemView);
+            }
+            else
+            {
+                // case of deallocation
+            }
+        }
     }
 }

@@ -25,6 +25,10 @@ namespace MemoryAllocation
         {
             holes.AddFirst(h);
         }
+        public void addProcess(Process p)
+        {
+            processes.AddFirst(p);
+        }
         public void clear()
         {
             holes.Clear();
@@ -76,6 +80,10 @@ namespace MemoryAllocation
                 
             }
             return ok;
+        }
+        public void firstFit()
+        {
+
         }
     }
 }

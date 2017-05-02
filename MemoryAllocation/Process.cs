@@ -11,6 +11,23 @@ namespace MemoryAllocation
     {
         private String number;
         private int size;
-        private Button b;
+        private TextBox box;
+        public Process(string num,int s)
+        {
+            number = num;
+            size = s;
+        }
+        public void setSize(int s)
+        {
+            size = s;
+        }
+        public int getSize()
+        {
+            return size;
+        }
+        public String getNumber()
+        {
+            return number;
+        }
     }
 }
