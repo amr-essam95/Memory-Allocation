@@ -30,11 +30,11 @@
         {
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lableNumber = new System.Windows.Forms.Label();
-            this.labelSize = new System.Windows.Forms.Label();
-            this.number = new System.Windows.Forms.TextBox();
-            this.size = new System.Windows.Forms.TextBox();
             this.allocate = new System.Windows.Forms.Button();
+            this.size = new System.Windows.Forms.TextBox();
+            this.number = new System.Windows.Forms.TextBox();
+            this.labelSize = new System.Windows.Forms.Label();
+            this.lableNumber = new System.Windows.Forms.Label();
             this.list = new System.Windows.Forms.ListView();
             this.memoryPanel = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
@@ -66,38 +66,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
-            // lableNumber
-            // 
-            this.lableNumber.AutoSize = true;
-            this.lableNumber.Location = new System.Drawing.Point(23, 34);
-            this.lableNumber.Name = "lableNumber";
-            this.lableNumber.Size = new System.Drawing.Size(88, 13);
-            this.lableNumber.TabIndex = 0;
-            this.lableNumber.Text = "Process Number:";
-            // 
-            // labelSize
-            // 
-            this.labelSize.AutoSize = true;
-            this.labelSize.Location = new System.Drawing.Point(23, 79);
-            this.labelSize.Name = "labelSize";
-            this.labelSize.Size = new System.Drawing.Size(71, 13);
-            this.labelSize.TabIndex = 1;
-            this.labelSize.Text = "Process Size:";
-            // 
-            // number
-            // 
-            this.number.Location = new System.Drawing.Point(145, 31);
-            this.number.Name = "number";
-            this.number.Size = new System.Drawing.Size(167, 20);
-            this.number.TabIndex = 2;
-            // 
-            // size
-            // 
-            this.size.Location = new System.Drawing.Point(145, 76);
-            this.size.Name = "size";
-            this.size.Size = new System.Drawing.Size(167, 20);
-            this.size.TabIndex = 3;
-            // 
             // allocate
             // 
             this.allocate.Location = new System.Drawing.Point(145, 128);
@@ -108,11 +76,43 @@
             this.allocate.UseVisualStyleBackColor = true;
             this.allocate.Click += new System.EventHandler(this.allocate_Click);
             // 
+            // size
+            // 
+            this.size.Location = new System.Drawing.Point(145, 76);
+            this.size.Name = "size";
+            this.size.Size = new System.Drawing.Size(167, 20);
+            this.size.TabIndex = 3;
+            // 
+            // number
+            // 
+            this.number.Location = new System.Drawing.Point(145, 31);
+            this.number.Name = "number";
+            this.number.Size = new System.Drawing.Size(167, 20);
+            this.number.TabIndex = 2;
+            // 
+            // labelSize
+            // 
+            this.labelSize.AutoSize = true;
+            this.labelSize.Location = new System.Drawing.Point(23, 79);
+            this.labelSize.Name = "labelSize";
+            this.labelSize.Size = new System.Drawing.Size(71, 13);
+            this.labelSize.TabIndex = 1;
+            this.labelSize.Text = "Process Size:";
+            // 
+            // lableNumber
+            // 
+            this.lableNumber.AutoSize = true;
+            this.lableNumber.Location = new System.Drawing.Point(23, 34);
+            this.lableNumber.Name = "lableNumber";
+            this.lableNumber.Size = new System.Drawing.Size(88, 13);
+            this.lableNumber.TabIndex = 0;
+            this.lableNumber.Text = "Process Number:";
+            // 
             // list
             // 
             this.list.Location = new System.Drawing.Point(562, 30);
             this.list.Name = "list";
-            this.list.Size = new System.Drawing.Size(167, 268);
+            this.list.Size = new System.Drawing.Size(547, 268);
             this.list.TabIndex = 2;
             this.list.UseCompatibleStateImageBehavior = false;
             this.list.View = System.Windows.Forms.View.Details;
@@ -123,14 +123,14 @@
             this.memoryPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.memoryPanel.Location = new System.Drawing.Point(65, 356);
             this.memoryPanel.Name = "memoryPanel";
-            this.memoryPanel.Size = new System.Drawing.Size(664, 227);
+            this.memoryPanel.Size = new System.Drawing.Size(1044, 227);
             this.memoryPanel.TabIndex = 3;
             // 
             // Simulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 661);
+            this.ClientSize = new System.Drawing.Size(1184, 661);
             this.Controls.Add(this.memoryPanel);
             this.Controls.Add(this.list);
             this.Controls.Add(this.groupBox1);

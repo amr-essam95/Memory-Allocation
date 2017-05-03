@@ -12,7 +12,7 @@ namespace MemoryAllocation
 {
     public partial class Form1 : Form
     {
-        Simulation sim = new Simulation();
+        Simulation sim ;
         Memory memory = new Memory();
         int numberOfHoles = 0;
         public Form1()
@@ -21,7 +21,6 @@ namespace MemoryAllocation
             initializeList();
             comboBox1.SelectedIndex = 1;
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            sim.setForm(this);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             //for (int i = 0; i < 5; i++)

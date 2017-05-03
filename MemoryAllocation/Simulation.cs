@@ -14,7 +14,7 @@ namespace MemoryAllocation
     {
         Form mainform;
         Memory memory;
-        int x_point = 0;
+        int y_point = 100;
         public Simulation()
         {
             InitializeComponent();
@@ -123,42 +123,35 @@ namespace MemoryAllocation
         {
             LinkedList<Hole> holes = memory.getHoles();
             List<Hole> SortedList = holes.OrderBy(o => o.getStarting()).ToList();
-            x_point += 200;
-            int y_point = 50;
+            int x_point = 50;
             foreach (var hole in SortedList)
             {
                 LinkedList<Process> processes = hole.getProcesses();
                 List<Process> SortedProcesses = processes.OrderBy(o => o.getStarting()).ToList();
-                foreach(var process in SortedProcesses)
+                foreach (var process in SortedProcesses)
                 {
                     Point newLoc = new Point(x_point, y_point);
                     Button temp = new Button();
                     temp.Text = process.getNumber();
-                    temp.Size = new Size(100, process.getSize());
+                    temp.Size = new Size(process.getSize(), 50);
                     temp.Location = newLoc;
+                    if (process.getNumber() .Equals("Reserved"))
+                        temp.Enabled = false;
+                    Label label1 = new Label();
+                    label1.Text = (process.getStarting()).ToString();
+                    label1.Font = new Font("Arial", 6);
+                    label1.Location = new Point(x_point-5,y_point+60);
+                    Label label2 = new Label();
+                    label2.Text = (process.getStarting() + process.getSize()).ToString();
+                    label2.Font = new Font("Arial", 6);
+                    label2.Location = new Point(x_point+process.getSize()-5, y_point+60);
                     memoryPanel.Controls.Add(temp);
-                    y_point += process.getSize();
+                    memoryPanel.Controls.Add(label1);
+                    memoryPanel.Controls.Add(label2);
+                    x_point += process.getSize();
                 }
-                
-                //    Point newLoc = new Point(i*50,100);
-                //    TextBox x = new TextBox();
-                //    x.Text = i.ToString();
-                //    x.Size = new Size(50, 100);
-                //    x.Location = newLoc;
-                //    var margin = x.Margin;
-                //    margin.Bottom = -10;
-                //    margin.Left = 0;
-                //    margin.Right = 0;
-                //    margin.Top = -10;
-                //    x.Margin = margin;
-                //    x.Padding = new Padding(0, -10, 0, -10);
-                //    //x.Dock = DockStyle.Fill;
-                //    x.Margin = new Padding(0);
-                //    x.AutoSize = true;
-
-                //    this.Controls.Add(x);
-                //}
             }
+            y_point += 200;
         }
     }
 }

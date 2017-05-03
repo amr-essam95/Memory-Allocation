@@ -15,6 +15,7 @@ namespace MemoryAllocation
         int Size;
         int number;
         int freeSpace = 0;
+        int smallestFreeSpace = 0;
         
 
         public Hole(int num,int starting ,int size)
@@ -22,6 +23,8 @@ namespace MemoryAllocation
             startingAddress = starting;
             Size = size;
             number = num;
+            smallestFreeSpace = size;
+            freeSpace = size;
             if(num<0)
             {
                 Process tempReserved = new Process("reserved", size);
@@ -78,7 +81,7 @@ namespace MemoryAllocation
             {
                 if(process.getNumber().Equals("free") && process.getSize() >= p.getSize())
                 {
-                    p.setStarting(p.getStarting());
+                    p.setStarting(process.getStarting());
                     int difference = process.getSize() - p.getSize();
                     p.setHole(this);
                     processes.AddFirst(p);
@@ -88,20 +91,33 @@ namespace MemoryAllocation
                         temp.setStarting(process.getStarting() + p.getSize());
                         processes.AddFirst(temp);
                     }
-                    break;
+                    processes.Remove(process);
+                    updateFreeSpace();
+                    updateSamllestFreeSpace();
+                    return true;
                 }
             }
-            ////////////////
+            updateFreeSpace();
+            updateSamllestFreeSpace();
             return false;
+        }
+        public int getSmallestSpace()
+        {
+            return smallestFreeSpace;
         }
         public bool placeBestFit(Process p)
         {
             List<Process> SortedList = processes.OrderBy(o => o.getSize()).ToList();
+            SortedList.Sort(delegate (Process c1, Process c2) {
+                if (c1.getSize() == c2.getSize())
+                    return c1.getStarting().CompareTo(c2.getStarting());
+                return c1.getSize().CompareTo(c2.getSize());
+                });
             foreach (var process in SortedList)
             {
                 if (process.getNumber().Equals("free") && process.getSize() >= p.getSize())
                 {
-                    p.setStarting(p.getStarting());
+                    p.setStarting(process.getStarting());
                     int difference = process.getSize() - p.getSize();
                     p.setHole(this);
                     processes.AddFirst(p);
@@ -112,9 +128,13 @@ namespace MemoryAllocation
                         processes.AddFirst(temp);
                     }
                     processes.Remove(process);
+                    updateFreeSpace();
+                    updateSamllestFreeSpace();
                     return true;
                 }
             }
+            updateFreeSpace();
+            updateSamllestFreeSpace();
             return false;
         }
         private void updateFreeSpace()
@@ -127,11 +147,21 @@ namespace MemoryAllocation
                     freeSpace = Process.getSize();
                     return;
                 }
-                else
+            }
+            freeSpace = 0;
+        }
+        private void updateSamllestFreeSpace()
+        {
+            List<Process> SortedList = processes.OrderBy(o => o.getSize()).ToList();
+            foreach (var Process in processes)
+            {
+                if (Process.getNumber().Equals("free"))
                 {
-                    freeSpace = 0;
+                    smallestFreeSpace = Process.getSize();
+                    return;
                 }
             }
+            freeSpace = 0;
         }
     }
 
