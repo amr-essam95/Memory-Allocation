@@ -182,6 +182,8 @@ namespace MemoryAllocation
                 check = process.getStarting() + process.getSize();
                 temp = process;
             }
+            updateFreeSpace();
+            updateSamllestFreeSpace();
         }
     }
 

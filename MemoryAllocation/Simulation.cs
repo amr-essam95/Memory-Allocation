@@ -14,32 +14,12 @@ namespace MemoryAllocation
     {
         Form mainform;
         Memory memory;
-        int y_point = 100;
+        int y_point = 20;
         public Simulation()
         {
             InitializeComponent();
             initializeList();
             comboBox1.SelectedIndex = 0;
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    Point newLoc = new Point(i*50,100);
-            //    TextBox x = new TextBox();
-            //    x.Text = i.ToString();
-            //    x.Size = new Size(50, 100);
-            //    x.Location = newLoc;
-            //    var margin = x.Margin;
-            //    margin.Bottom = -10;
-            //    margin.Left = 0;
-            //    margin.Right = 0;
-            //    margin.Top = -10;
-            //    x.Margin = margin;
-            //    x.Padding = new Padding(0, -10, 0, -10);
-            //    //x.Dock = DockStyle.Fill;
-            //    x.Margin = new Padding(0);
-            //    x.AutoSize = true;
-
-            //    this.Controls.Add(x);
-            //}
         }
         public void setForm(Form f)
         {
@@ -110,6 +90,7 @@ namespace MemoryAllocation
                 if(!valid)
                 {
                     MessageBox.Show("This process is in the waiting queue.\nAfter process is deallocated it'll be allocated");
+                    return;
                 }
 
                 drawMemory();  
@@ -130,11 +111,11 @@ namespace MemoryAllocation
                 drawMemory();
             }
         }
-        private void drawMemory()
+        public void drawMemory()
         {
             LinkedList<Hole> holes = memory.getHoles();
             List<Hole> SortedList = holes.OrderBy(o => o.getStarting()).ToList();
-            int x_point = 50;
+            int x_point = 20;
             foreach (var hole in SortedList)
             {
                 LinkedList<Process> processes = hole.getProcesses();
@@ -162,7 +143,7 @@ namespace MemoryAllocation
                     x_point += process.getSize();
                 }
             }
-            y_point += 200;
+            y_point += 100;
         }
     }
 }

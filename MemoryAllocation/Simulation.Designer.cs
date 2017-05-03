@@ -42,6 +42,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Allocation",
@@ -59,7 +60,7 @@
             this.groupBox1.Controls.Add(this.number);
             this.groupBox1.Controls.Add(this.labelSize);
             this.groupBox1.Controls.Add(this.lableNumber);
-            this.groupBox1.Location = new System.Drawing.Point(65, 106);
+            this.groupBox1.Location = new System.Drawing.Point(65, 73);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(340, 192);
             this.groupBox1.TabIndex = 1;
@@ -112,7 +113,7 @@
             // 
             this.list.Location = new System.Drawing.Point(562, 30);
             this.list.Name = "list";
-            this.list.Size = new System.Drawing.Size(547, 268);
+            this.list.Size = new System.Drawing.Size(698, 235);
             this.list.TabIndex = 2;
             this.list.UseCompatibleStateImageBehavior = false;
             this.list.View = System.Windows.Forms.View.Details;
@@ -121,16 +122,16 @@
             // 
             this.memoryPanel.AutoScroll = true;
             this.memoryPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.memoryPanel.Location = new System.Drawing.Point(65, 356);
+            this.memoryPanel.Location = new System.Drawing.Point(65, 289);
             this.memoryPanel.Name = "memoryPanel";
-            this.memoryPanel.Size = new System.Drawing.Size(1044, 227);
+            this.memoryPanel.Size = new System.Drawing.Size(1195, 360);
             this.memoryPanel.TabIndex = 3;
             // 
             // Simulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.ClientSize = new System.Drawing.Size(1284, 661);
             this.Controls.Add(this.memoryPanel);
             this.Controls.Add(this.list);
             this.Controls.Add(this.groupBox1);

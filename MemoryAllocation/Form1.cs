@@ -132,6 +132,7 @@ namespace MemoryAllocation
             memory.fillGaps();
             sim.Show();
             this.Hide();
+            sim.drawMemory();
         }
     }
 }

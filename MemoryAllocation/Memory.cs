@@ -152,6 +152,7 @@ namespace MemoryAllocation
             Hole h = process.getHole();
             process.setNumber("free");
             h.removeAdjacent();
+            processes.Remove(process);
         }
     }
 }
