@@ -116,7 +116,18 @@ namespace MemoryAllocation
             }
             else
             {
-                // case of deallocation
+                int removed;
+                try
+                {
+                    removed = Convert.ToInt32(number.Text.ToString());
+                }
+                catch
+                {
+                    MessageBox.Show("Please enter a valid number");
+                    return;
+                }
+                memory.deallocate(removed);
+                drawMemory();
             }
         }
         private void drawMemory()

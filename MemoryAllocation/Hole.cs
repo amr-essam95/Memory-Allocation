@@ -163,6 +163,26 @@ namespace MemoryAllocation
             }
             freeSpace = 0;
         }
+        public void removeAdjacent()
+        {
+            List<Process> SortedList = processes.OrderBy(o => o.getStarting()).ToList();
+            int check = 0;
+            Process temp= new Process();
+            foreach(var process in SortedList)
+            { 
+                if(process.getNumber().Equals("free") && check!=0)
+                {
+                    if(process.getStarting()==check && temp.getNumber().Equals("free"))
+                    {
+                        process.setSize(process.getSize() + temp.getSize());
+                        process.setStarting(temp.getStarting());
+                        processes.Remove(temp);
+                    }
+                }
+                check = process.getStarting() + process.getSize();
+                temp = process;
+            }
+        }
     }
 
 }

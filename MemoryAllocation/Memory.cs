@@ -146,5 +146,12 @@ namespace MemoryAllocation
             }
 
         }
+        public void deallocate(int n)
+        {
+            var process = processes.FirstOrDefault(x => x.getNumber().Equals(n.ToString()));
+            Hole h = process.getHole();
+            process.setNumber("free");
+            h.removeAdjacent();
+        }
     }
 }

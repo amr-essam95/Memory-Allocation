@@ -14,10 +14,15 @@ namespace MemoryAllocation
         //private TextBox box;
         private Hole hole;
         private int starting;
+        public Process() { }
         public Process(string num,int s)
         {
             number = num;
             size = s;
+        }
+        public void setNumber(String n)
+        {
+            number = n;
         }
         public int getStarting()
         {
