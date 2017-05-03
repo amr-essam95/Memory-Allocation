@@ -23,27 +23,6 @@ namespace MemoryAllocation
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    Point newLoc = new Point(5, 5+i*50);
-            //    Button x = new Button();
-            //    x.Text = i.ToString();
-            //    x.Size = new Size(100,50);
-            //    x.Location = newLoc ;
-            //    var margin = x.Margin;
-            //    margin.Bottom = -10;
-            //    margin.Left = 0;
-            //    margin.Right = 0;
-            //    margin.Top = -10;
-            //    x.Margin = margin;
-            //    x.Padding = new Padding(0, -10, 0, -10);
-            //    //x.Dock = DockStyle.Fill;
-            //    x.Margin = new Padding(0);
-            //    x.AutoSize = true;
-
-            //    this.Controls.Add(x);
-            //}
-
         }
         private void initializeList()
         { 
@@ -54,6 +33,16 @@ namespace MemoryAllocation
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+        public void UpdateList(LinkedList<Hole> x)
+        {
+            list.Items.Clear();
+            for (LinkedListNode<Hole> temp = x.First; temp != null; temp = temp.Next)
+            {
+                String[] row = { temp.Value.getNumber().ToString(), temp.Value.getStarting().ToString() ,temp.Value.getSize().ToString()};
+                var listItemView = new ListViewItem(row);
+                list.Items.Add(listItemView);
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -98,16 +87,17 @@ namespace MemoryAllocation
             Hole adjacent = memory.checkAdjacency(tempHole);
             if (adjacent !=null)
             {
-                String[] row = { adjacent.getNumber().ToString(), adjacent.getStarting().ToString(), adjacent.getSize().ToString() };
-                var listItemView = new ListViewItem(row);
-                list.Items.Add(listItemView);
+                //String[] row = { adjacent.getNumber().ToString(), adjacent.getStarting().ToString(), adjacent.getSize().ToString() };
+                //var listItemView = new ListViewItem(row);
+                //list.Items.Add(listItemView);
             }
             else
             {
                 memory.addHole(tempHole);
-                String[] row = { numberOfHoles.ToString(), starting.ToString(), sizeOfHole.ToString() };
-                var listItemView = new ListViewItem(row);
-                list.Items.Add(listItemView);
+                //String[] row = { numberOfHoles.ToString(), starting.ToString(), sizeOfHole.ToString() };
+                //var listItemView = new ListViewItem(row);
+                //list.Items.Add(listItemView);
+                UpdateList(memory.getHoles());
             }
         }
 
