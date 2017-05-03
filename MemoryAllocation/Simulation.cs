@@ -34,6 +34,16 @@ namespace MemoryAllocation
             list.Columns.Add("Process Number", -2);
             list.Columns.Add("Size", -2);
         }
+        public void UpdateList(LinkedList<Process> x)
+        {
+            list.Items.Clear();
+            for (LinkedListNode<Process> temp = x.First; temp != null; temp = temp.Next)
+            {
+                String[] row = { temp.Value.getNumber(), temp.Value.getSize().ToString() };
+                var listItemView = new ListViewItem(row);
+                list.Items.Add(listItemView);
+            }
+        }
 
         private void Simulation_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -75,9 +85,10 @@ namespace MemoryAllocation
                 }
                 Process temp = new Process(number.Text,s);
                 memory.addProcess(temp);
-                String[] row = { temp.getNumber(),temp.getSize().ToString() };
-                var listItemView = new ListViewItem(row);
-                list.Items.Add(listItemView);
+                //String[] row = { temp.getNumber(),temp.getSize().ToString() };
+                //var listItemView = new ListViewItem(row);
+                //list.Items.Add(listItemView);
+                UpdateList(memory.getProcesses());
                 bool valid;
                 if(memory.getAlgorithm().Equals("First Fit"))
                 {
@@ -108,6 +119,7 @@ namespace MemoryAllocation
                     return;
                 }
                 memory.deallocate(removed);
+                UpdateList(memory.getProcesses());
                 drawMemory();
             }
         }

@@ -22,6 +22,10 @@ namespace MemoryAllocation
         {
             algorithm = alg;
         }
+        public LinkedList<Process> getProcesses()
+        {
+            return processes;
+        }
         public String getAlgorithm()
         {
             return algorithm;
