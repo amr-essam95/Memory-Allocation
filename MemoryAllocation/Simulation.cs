@@ -14,6 +14,7 @@ namespace MemoryAllocation
     {
         Form mainform;
         Memory memory;
+        int x_point = 0;
         public Simulation()
         {
             InitializeComponent();
@@ -111,11 +112,52 @@ namespace MemoryAllocation
                     MessageBox.Show("This process is in the waiting queue.\nAfter process is deallocated it'll be allocated");
                 }
 
-                
+                drawMemory();  
             }
             else
             {
                 // case of deallocation
+            }
+        }
+        private void drawMemory()
+        {
+            LinkedList<Hole> holes = memory.getHoles();
+            List<Hole> SortedList = holes.OrderBy(o => o.getStarting()).ToList();
+            x_point += 200;
+            int y_point = 50;
+            foreach (var hole in SortedList)
+            {
+                LinkedList<Process> processes = hole.getProcesses();
+                List<Process> SortedProcesses = processes.OrderBy(o => o.getStarting()).ToList();
+                foreach(var process in SortedProcesses)
+                {
+                    Point newLoc = new Point(x_point, y_point);
+                    Button temp = new Button();
+                    temp.Text = process.getNumber();
+                    temp.Size = new Size(100, process.getSize());
+                    temp.Location = newLoc;
+                    memoryPanel.Controls.Add(temp);
+                    y_point += process.getSize();
+                }
+                
+                //    Point newLoc = new Point(i*50,100);
+                //    TextBox x = new TextBox();
+                //    x.Text = i.ToString();
+                //    x.Size = new Size(50, 100);
+                //    x.Location = newLoc;
+                //    var margin = x.Margin;
+                //    margin.Bottom = -10;
+                //    margin.Left = 0;
+                //    margin.Right = 0;
+                //    margin.Top = -10;
+                //    x.Margin = margin;
+                //    x.Padding = new Padding(0, -10, 0, -10);
+                //    //x.Dock = DockStyle.Fill;
+                //    x.Margin = new Padding(0);
+                //    x.AutoSize = true;
+
+                //    this.Controls.Add(x);
+                //}
             }
         }
     }

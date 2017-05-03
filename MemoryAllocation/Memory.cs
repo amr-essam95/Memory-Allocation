@@ -38,6 +38,10 @@ namespace MemoryAllocation
         {
             holes.Clear();
         }
+        public LinkedList<Hole> getHoles()
+        {
+            return holes;
+        }
         public Hole checkAdjacency(Hole h)
         {
             for (LinkedListNode<Hole> it = holes.First; it != null; it = it.Next)
@@ -92,7 +96,7 @@ namespace MemoryAllocation
             int allocatedSize = p.getSize();
             foreach (var hole in SortedList)
             {
-                if (allocatedSize < hole.getSpace())
+                if (allocatedSize < hole.getSpace() && hole.getNumber() > 0)
                 {
                     bool valid = hole.placeFirstFit(p);
                     if (valid)
@@ -110,7 +114,7 @@ namespace MemoryAllocation
             int allocatedSize = p.getSize();
             foreach (var hole in SortedList)
             {
-                if (allocatedSize < hole.getSpace())
+                if (allocatedSize < hole.getSpace()&& hole.getNumber()>0)
                 {
                     bool valid = hole.placeBestFit(p);
                     if (valid)
@@ -121,6 +125,21 @@ namespace MemoryAllocation
             }
             waitingProcesses.AddFirst(p);
             return false;
+        }
+        public void fillGaps()
+        {
+            int lastchecked = 0;
+            List<Hole> SortedList = holes.OrderBy(o => o.getStarting()).ToList();
+            foreach(var hole in SortedList)
+            {
+                if (hole.getStarting()>lastchecked)
+                {
+                    Hole temp = new Hole(-1,lastchecked,hole.getStarting()-lastchecked);
+                    holes.AddFirst(temp);
+                }
+                lastchecked = hole.getStarting() + hole.getSize();
+            }
+
         }
     }
 }

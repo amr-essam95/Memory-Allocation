@@ -36,7 +36,7 @@
             this.size = new System.Windows.Forms.TextBox();
             this.allocate = new System.Windows.Forms.Button();
             this.list = new System.Windows.Forms.ListView();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.memoryPanel = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,20 +117,21 @@
             this.list.UseCompatibleStateImageBehavior = false;
             this.list.View = System.Windows.Forms.View.Details;
             // 
-            // panel1
+            // memoryPanel
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(65, 356);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(664, 227);
-            this.panel1.TabIndex = 3;
+            this.memoryPanel.AutoScroll = true;
+            this.memoryPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.memoryPanel.Location = new System.Drawing.Point(65, 356);
+            this.memoryPanel.Name = "memoryPanel";
+            this.memoryPanel.Size = new System.Drawing.Size(664, 227);
+            this.memoryPanel.TabIndex = 3;
             // 
             // Simulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 661);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.memoryPanel);
             this.Controls.Add(this.list);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
@@ -154,6 +155,6 @@
         private System.Windows.Forms.Label labelSize;
         private System.Windows.Forms.Label lableNumber;
         private System.Windows.Forms.ListView list;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel memoryPanel;
     }
 }

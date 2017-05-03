@@ -22,6 +22,14 @@ namespace MemoryAllocation
             startingAddress = starting;
             Size = size;
             number = num;
+            if(num<0)
+            {
+                Process tempReserved = new Process("reserved", size);
+                tempReserved.setStarting(starting);
+                processes.AddFirst(tempReserved);
+                freeSpace = 0;
+                return;
+            }
             Process temp = new Process("free", size);
             temp.setStarting(starting);
             processes.AddFirst(temp);
@@ -30,6 +38,10 @@ namespace MemoryAllocation
         public int getSize()
         {
             return Size;
+        }
+        public LinkedList<Process> getProcesses()
+        {
+            return processes;
         }
         public int getSpace()
         {
@@ -96,7 +108,7 @@ namespace MemoryAllocation
                     if (difference > 0)
                     {
                         Process temp = new Process("free", difference);
-                        temp.setStarting(process.getStarting() + p.getSize());
+                        temp.setStarting(p.getStarting() + p.getSize());
                         processes.AddFirst(temp);
                     }
                     processes.Remove(process);

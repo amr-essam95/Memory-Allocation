@@ -130,6 +130,7 @@ namespace MemoryAllocation
                 return;
             }
             memory.setAlgorithm(comboBox1.Text);
+            memory.fillGaps();
             sim.Show();
             this.Hide();
         }

@@ -11,7 +11,7 @@ namespace MemoryAllocation
     {
         private String number;
         private int size;
-        private TextBox box;
+        //private TextBox box;
         private Hole hole;
         private int starting;
         public Process(string num,int s)
