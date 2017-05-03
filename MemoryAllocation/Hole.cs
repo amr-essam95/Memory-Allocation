@@ -8,24 +8,36 @@ using System.Windows.Forms;
 
 namespace MemoryAllocation
 {
-    class Hole
+    public class Hole
     {
         LinkedList<Process> processes = new LinkedList<Process>();
         int startingAddress;
         int Size;
         int number;
-        TextBox box = new TextBox();
+        int freeSpace = 0;
+        
 
         public Hole(int num,int starting ,int size)
         {
             startingAddress = starting;
             Size = size;
             number = num;
-            box.Size = new Size(size, 50);
+            Process temp = new Process("free", size);
+            temp.setStarting(starting);
+            processes.AddFirst(temp);
+            freeSpace = size;   // holds the size of the largest contiguous space
         }
         public int getSize()
         {
             return Size;
+        }
+        public int getSpace()
+        {
+            return freeSpace;
+        }
+        public void setFreeSpace(int s)
+        {
+            freeSpace = s;
         }
         public int getNumber()
         {
@@ -47,5 +59,68 @@ namespace MemoryAllocation
         {
             startingAddress = start;
         }
+        public bool placeFirstFit(Process p)
+        {
+            List<Process> SortedList = processes.OrderBy(o => o.getStarting()).ToList();
+            foreach (var process in SortedList)
+            {
+                if(process.getNumber().Equals("free") && process.getSize() >= p.getSize())
+                {
+                    p.setStarting(p.getStarting());
+                    int difference = process.getSize() - p.getSize();
+                    p.setHole(this);
+                    processes.AddFirst(p);
+                    if (difference > 0)
+                    {
+                        Process temp = new Process("free", difference);
+                        temp.setStarting(process.getStarting() + p.getSize());
+                        processes.AddFirst(temp);
+                    }
+                    break;
+                }
+            }
+            ////////////////
+            return false;
+        }
+        public bool placeBestFit(Process p)
+        {
+            List<Process> SortedList = processes.OrderBy(o => o.getSize()).ToList();
+            foreach (var process in SortedList)
+            {
+                if (process.getNumber().Equals("free") && process.getSize() >= p.getSize())
+                {
+                    p.setStarting(p.getStarting());
+                    int difference = process.getSize() - p.getSize();
+                    p.setHole(this);
+                    processes.AddFirst(p);
+                    if (difference > 0)
+                    {
+                        Process temp = new Process("free", difference);
+                        temp.setStarting(process.getStarting() + p.getSize());
+                        processes.AddFirst(temp);
+                    }
+                    processes.Remove(process);
+                    return true;
+                }
+            }
+            return false;
+        }
+        private void updateFreeSpace()
+        {
+            List<Process> SortedList = processes.OrderByDescending(o => o.getSize()).ToList();
+            foreach (var Process in processes)
+            {
+                if(Process.getNumber().Equals("free"))
+                {
+                    freeSpace = Process.getSize();
+                    return;
+                }
+                else
+                {
+                    freeSpace = 0;
+                }
+            }
+        }
     }
+
 }

@@ -13,6 +13,7 @@ namespace MemoryAllocation
     public partial class Simulation : Form
     {
         Form mainform;
+        Memory memory;
         public Simulation()
         {
             InitializeComponent();
@@ -42,6 +43,10 @@ namespace MemoryAllocation
         public void setForm(Form f)
         {
             mainform = f;
+        }
+        public void setMemory(Memory x)
+        {
+            memory = x;
         }
         private void initializeList()
         {
@@ -88,9 +93,25 @@ namespace MemoryAllocation
                     return;
                 }
                 Process temp = new Process(number.Text,s);
+                memory.addProcess(temp);
                 String[] row = { temp.getNumber(),temp.getSize().ToString() };
                 var listItemView = new ListViewItem(row);
                 list.Items.Add(listItemView);
+                bool valid;
+                if(memory.getAlgorithm().Equals("First Fit"))
+                {
+                    valid = memory.firstFit(temp);
+                }
+                else
+                {
+                    valid = memory.bestFit(temp);
+                }
+                if(!valid)
+                {
+                    MessageBox.Show("This process is in the waiting queue.\nAfter process is deallocated it'll be allocated");
+                }
+
+                
             }
             else
             {

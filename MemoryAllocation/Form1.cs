@@ -123,6 +123,7 @@ namespace MemoryAllocation
         {
             sim = new Simulation();
             sim.setForm(this);
+            sim.setMemory(memory);
             if (memory.noHoles())
             {
                 MessageBox.Show("No holes are available. \nplease enter at least one hole.");

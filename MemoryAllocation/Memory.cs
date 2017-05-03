@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace MemoryAllocation
 {
-    class Memory
+    public class Memory
     {
         LinkedList<Hole> holes = new LinkedList<Hole>();
         LinkedList<Process> processes = new LinkedList<Process>();
+        LinkedList<Process> waitingProcesses = new LinkedList<Process>();
         String algorithm = "First Fit";
         public Memory()
         { }
@@ -20,6 +21,10 @@ namespace MemoryAllocation
         public void setAlgorithm(String alg)
         {
             algorithm = alg;
+        }
+        public String getAlgorithm()
+        {
+            return algorithm;
         }
         public void addHole(Hole h)
         {
@@ -37,12 +42,12 @@ namespace MemoryAllocation
         {
             for (LinkedListNode<Hole> it = holes.First; it != null; it = it.Next)
             {
-                if (it.Value.getSize()+it.Value.getStarting()==h.getStarting())
+                if (it.Value.getSize() + it.Value.getStarting() == h.getStarting())
                 {
                     it.Value.setSize(it.Value.getSize() + h.getSize());
                     return it.Value;
                 }
-                else if (h.getStarting()+h.getSize()==it.Value.getStarting())
+                else if (h.getStarting() + h.getSize() == it.Value.getStarting())
                 {
                     it.Value.setSize(it.Value.getSize() + h.getSize());
                     it.Value.setStarting(h.getStarting());
@@ -63,7 +68,7 @@ namespace MemoryAllocation
             bool ok = true;
             for (LinkedListNode<Hole> it = holes.First; it != null; it = it.Next)
             {
-                if(h.getStarting() < it.Value.getStarting())
+                if (h.getStarting() < it.Value.getStarting())
                 {
                     if (h.getSize() + h.getStarting() > it.Value.getStarting())
                     {
@@ -72,18 +77,50 @@ namespace MemoryAllocation
                 }
                 else
                 {
-                    if(it.Value.getSize()+it.Value.getStarting() > h.getStarting())
+                    if (it.Value.getSize() + it.Value.getStarting() > h.getStarting())
                     {
                         ok = false;
                     }
                 }
-                
+
             }
             return ok;
         }
-        public void firstFit()
+        public bool firstFit(Process p)
         {
-
+            List<Hole> SortedList = holes.OrderBy(o => o.getStarting()).ToList();
+            int allocatedSize = p.getSize();
+            foreach (var hole in SortedList)
+            {
+                if (allocatedSize < hole.getSpace())
+                {
+                    bool valid = hole.placeFirstFit(p);
+                    if (valid)
+                    {
+                        return true;
+                    }
+                }
+            }
+            waitingProcesses.AddFirst(p);
+            return false;
+        }
+        public bool bestFit(Process p)
+        {
+            List<Hole> SortedList = holes.OrderBy(o => o.getSize()).ToList();
+            int allocatedSize = p.getSize();
+            foreach (var hole in SortedList)
+            {
+                if (allocatedSize < hole.getSpace())
+                {
+                    bool valid = hole.placeBestFit(p);
+                    if (valid)
+                    {
+                        return true;
+                    }
+                }
+            }
+            waitingProcesses.AddFirst(p);
+            return false;
         }
     }
 }
