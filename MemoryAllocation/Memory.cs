@@ -181,6 +181,7 @@ namespace MemoryAllocation
                 else
                 {
                     hole.setStarting(hole.getStarting() - shifting);
+                    hole.updateReserved(shifting);
                     finish = hole.getStarting() + hole.getSize();
                 }
                 

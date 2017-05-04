@@ -38,7 +38,6 @@
             this.lableNumber = new System.Windows.Forms.Label();
             this.list = new System.Windows.Forms.ListView();
             this.memoryPanel = new System.Windows.Forms.Panel();
-            this.compact = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +56,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.compact);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.allocate);
             this.groupBox1.Controls.Add(this.size);
@@ -141,16 +139,6 @@
             this.memoryPanel.Size = new System.Drawing.Size(1195, 360);
             this.memoryPanel.TabIndex = 3;
             // 
-            // compact
-            // 
-            this.compact.Location = new System.Drawing.Point(237, 128);
-            this.compact.Name = "compact";
-            this.compact.Size = new System.Drawing.Size(75, 23);
-            this.compact.TabIndex = 5;
-            this.compact.Text = "compact";
-            this.compact.UseVisualStyleBackColor = true;
-            this.compact.Click += new System.EventHandler(this.compact_Click);
-            // 
             // Simulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -182,6 +170,5 @@
         private System.Windows.Forms.ListView list;
         private System.Windows.Forms.Panel memoryPanel;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button compact;
     }
 }

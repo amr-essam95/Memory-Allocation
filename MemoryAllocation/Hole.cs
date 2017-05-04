@@ -196,6 +196,13 @@ namespace MemoryAllocation
             updateFreeSpace();
             updateSamllestFreeSpace();
         }
+        public void updateReserved(int x)
+        {
+            for (LinkedListNode<Process> it = processes.First; it != null; it = it.Next)
+            {
+                it.Value.setStarting(it.Value.getStarting()-x);
+            }
+        }
         public int compactHole()
         {
             int shifting = 0;
@@ -214,6 +221,8 @@ namespace MemoryAllocation
                 
             }
             setSize(getSize() - totalFree);
+            smallestFreeSpace = 0;
+            freeSpace = 0;
             return totalFree;
         }
     }

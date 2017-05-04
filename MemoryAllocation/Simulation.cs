@@ -14,6 +14,7 @@ namespace MemoryAllocation
     {
         Form mainform;
         Memory memory;
+        List<string> ss = new List<string>();
         int y_point = 20;
         public Simulation()
         {
@@ -85,6 +86,12 @@ namespace MemoryAllocation
                     MessageBox.Show("Please enter a valid size");
                     return;
                 }
+                if(ss.Contains(number.Text))
+                {
+                    MessageBox.Show("There is a process with this number.");
+                    return;
+                }
+                ss.Add(number.Text);
                 Process temp = new Process(number.Text,s);
                 memory.addProcess(temp);
                 //String[] row = { temp.getNumber(),temp.getSize().ToString() };
@@ -129,7 +136,8 @@ namespace MemoryAllocation
         {
             LinkedList<Hole> holes = memory.getHoles();
             List<Hole> SortedList = holes.OrderBy(o => o.getStarting()).ToList();
-            int x_point = 20;
+            int x_point = 40;
+            int var = 1;
             foreach (var hole in SortedList)
             {
                 LinkedList<Process> processes = hole.getProcesses();
@@ -139,25 +147,33 @@ namespace MemoryAllocation
                     Point newLoc = new Point(x_point, y_point);
                     Button temp = new Button();
                     temp.Text = process.getNumber();
-                    temp.Size = new Size(process.getSize(), 50);
+                    temp.Size = new Size(process.getSize()*var, 30);
                     temp.Location = newLoc;
                     if (process.getNumber() .Equals("Reserved"))
                         temp.Enabled = false;
                     Label label1 = new Label();
                     label1.Text = (process.getStarting()).ToString();
                     label1.Font = new Font("Arial", 6);
-                    label1.Location = new Point(x_point-5,y_point+60);
+                    label1.BorderStyle = BorderStyle.None;
+                    label1.Margin = new Padding(0,0,0,0);
+                    label1.MaximumSize = new Size(30, 20);
+                    label1.Location = new Point(x_point-5,y_point+40);
                     Label label2 = new Label();
                     label2.Text = (process.getStarting() + process.getSize()).ToString();
                     label2.Font = new Font("Arial", 6);
-                    label2.Location = new Point(x_point+process.getSize()-5, y_point+60);
+                    label2.BorderStyle = BorderStyle.None;
+                    label2.MaximumSize = new Size(30, 20);
+                    label2.Margin = new Padding(0, 0, 0, 0);
+                    label2.Location = new Point(x_point+process.getSize()*var-5, y_point+40);
                     memoryPanel.Controls.Add(temp);
                     memoryPanel.Controls.Add(label1);
                     memoryPanel.Controls.Add(label2);
-                    x_point += process.getSize();
+                    x_point += process.getSize()*var;
                 }
             }
-            y_point += 100;
+            y_point += 80;
+            memoryPanel.MaximumSize = new Size(10000,10000);
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
