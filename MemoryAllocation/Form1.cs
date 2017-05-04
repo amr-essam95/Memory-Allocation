@@ -34,6 +34,10 @@ namespace MemoryAllocation
         {
 
         }
+        public ListView getList()
+        {
+            return list;
+        }
         public void UpdateList(LinkedList<Hole> x)
         {
             list.Items.Clear();
@@ -90,6 +94,7 @@ namespace MemoryAllocation
                 //String[] row = { adjacent.getNumber().ToString(), adjacent.getStarting().ToString(), adjacent.getSize().ToString() };
                 //var listItemView = new ListViewItem(row);
                 //list.Items.Add(listItemView);
+                UpdateList(memory.getHoles());
             }
             else
             {

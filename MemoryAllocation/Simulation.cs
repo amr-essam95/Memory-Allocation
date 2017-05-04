@@ -49,6 +49,8 @@ namespace MemoryAllocation
         {
             this.Hide();
             mainform.Show();
+            memory.clear();
+            mainform.Close();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -156,6 +158,18 @@ namespace MemoryAllocation
                 }
             }
             y_point += 100;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            mainform.Show();
+        }
+
+        private void compact_Click(object sender, EventArgs e)
+        {
+            memory.compact();
+            drawMemory();
         }
     }
 }

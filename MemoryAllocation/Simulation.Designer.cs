@@ -30,6 +30,7 @@
         {
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.allocate = new System.Windows.Forms.Button();
             this.size = new System.Windows.Forms.TextBox();
             this.number = new System.Windows.Forms.TextBox();
@@ -37,6 +38,7 @@
             this.lableNumber = new System.Windows.Forms.Label();
             this.list = new System.Windows.Forms.ListView();
             this.memoryPanel = new System.Windows.Forms.Panel();
+            this.compact = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +57,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.compact);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.allocate);
             this.groupBox1.Controls.Add(this.size);
             this.groupBox1.Controls.Add(this.number);
@@ -66,6 +70,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(145, 157);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(167, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Return to Holes Section";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // allocate
             // 
@@ -127,6 +141,16 @@
             this.memoryPanel.Size = new System.Drawing.Size(1195, 360);
             this.memoryPanel.TabIndex = 3;
             // 
+            // compact
+            // 
+            this.compact.Location = new System.Drawing.Point(237, 128);
+            this.compact.Name = "compact";
+            this.compact.Size = new System.Drawing.Size(75, 23);
+            this.compact.TabIndex = 5;
+            this.compact.Text = "compact";
+            this.compact.UseVisualStyleBackColor = true;
+            this.compact.Click += new System.EventHandler(this.compact_Click);
+            // 
             // Simulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,5 +181,7 @@
         private System.Windows.Forms.Label lableNumber;
         private System.Windows.Forms.ListView list;
         private System.Windows.Forms.Panel memoryPanel;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button compact;
     }
 }

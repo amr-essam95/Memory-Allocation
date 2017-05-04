@@ -38,6 +38,17 @@ namespace MemoryAllocation
             processes.AddFirst(temp);
             freeSpace = size;   // holds the size of the largest contiguous space
         }
+        public void setFreeProcess(int s)
+        {
+            for (LinkedListNode<Process> it = processes.First; it != null; it = it.Next)
+            {
+                it.Value.setSize(s);
+            }
+        }
+        public void setSamllestSpace(int x)
+        {
+            smallestFreeSpace = x;
+        }
         public int getSize()
         {
             return Size;
@@ -184,6 +195,26 @@ namespace MemoryAllocation
             }
             updateFreeSpace();
             updateSamllestFreeSpace();
+        }
+        public int compactHole()
+        {
+            int shifting = 0;
+            int totalFree = 0;
+            List<Process> SortedList = processes.OrderBy(o => o.getStarting()).ToList();
+            foreach (var process in SortedList)
+            {
+                process.setStarting(process.getStarting()-shifting);
+                if(process.getNumber().Equals("free"))
+                {
+                    totalFree += process.getSize();
+                    shifting += process.getSize();
+                    processes.Remove(process);
+                }
+                
+                
+            }
+            setSize(getSize() - totalFree);
+            return totalFree;
         }
     }
 

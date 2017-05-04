@@ -53,12 +53,17 @@ namespace MemoryAllocation
                 if (it.Value.getSize() + it.Value.getStarting() == h.getStarting())
                 {
                     it.Value.setSize(it.Value.getSize() + h.getSize());
+                    it.Value.setFreeSpace(it.Value.getSize());
+                    it.Value.setSamllestSpace(it.Value.getSize());
+                    it.Value.setFreeProcess(it.Value.getSize());
                     return it.Value;
                 }
                 else if (h.getStarting() + h.getSize() == it.Value.getStarting())
                 {
                     it.Value.setSize(it.Value.getSize() + h.getSize());
                     it.Value.setStarting(h.getStarting());
+                    it.Value.setFreeSpace(it.Value.getSize());
+                    it.Value.setSamllestSpace(it.Value.getSize());
                     return it.Value;
                 }
             }
@@ -157,6 +162,31 @@ namespace MemoryAllocation
             process.setNumber("free");
             h.removeAdjacent();
             processes.Remove(process);
+        }
+        public void compact()
+        {
+            int totalfree = 0;
+            int shifting = 0;
+            int finish = 0;
+            List<Hole> SortedList = holes.OrderBy(o => o.getStarting()).ToList();
+            foreach (var hole in SortedList)
+            {
+                if(hole.getNumber()>=0)
+                {
+                    hole.setStarting(hole.getStarting() - shifting);
+                    shifting += hole.compactHole();
+                    totalfree += shifting;
+                    finish = hole.getStarting() + hole.getSize();
+                }
+                else
+                {
+                    hole.setStarting(hole.getStarting() - shifting);
+                    finish = hole.getStarting() + hole.getSize();
+                }
+                
+            }
+            Hole free = new Hole(0,finish,totalfree);
+            holes.AddLast(free);
         }
     }
 }
