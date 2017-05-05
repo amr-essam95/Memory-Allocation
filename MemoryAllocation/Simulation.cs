@@ -128,6 +128,7 @@ namespace MemoryAllocation
                     return;
                 }
                 memory.deallocate(removed);
+                ss.Remove(number.Text);
                 UpdateList(memory.getProcesses());
                 drawMemory();
             }
@@ -179,10 +180,17 @@ namespace MemoryAllocation
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
+            list.Items.Clear();
             mainform.Show();
         }
 
         private void compact_Click(object sender, EventArgs e)
+        {
+            memory.compact();
+            drawMemory();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             memory.compact();
             drawMemory();

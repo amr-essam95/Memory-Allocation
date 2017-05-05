@@ -128,7 +128,7 @@ namespace MemoryAllocation
             int allocatedSize = p.getSize();
             foreach (var hole in SortedList)
             {
-                if (allocatedSize <= hole.getSpace()&& hole.getNumber()>0)
+                if (allocatedSize <= hole.getSpace()&& hole.getNumber()>=0)
                 {
                     bool valid = hole.placeBestFit(p);
                     if (valid)
@@ -175,7 +175,7 @@ namespace MemoryAllocation
                 {
                     hole.setStarting(hole.getStarting() - shifting);
                     shifting += hole.compactHole();
-                    totalfree += shifting;
+                    totalfree = shifting;
                     finish = hole.getStarting() + hole.getSize();
                 }
                 else
@@ -184,7 +184,8 @@ namespace MemoryAllocation
                     hole.updateReserved(shifting);
                     finish = hole.getStarting() + hole.getSize();
                 }
-                
+                if (hole.getSize() == 0)
+                    holes.Remove(hole);
             }
             Hole free = new Hole(0,finish,totalfree);
             holes.AddLast(free);
