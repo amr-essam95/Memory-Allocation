@@ -50,6 +50,7 @@ namespace MemoryAllocation
         public void clear()
         {
             holes.Clear();
+            processes.Clear();
         }
         public LinkedList<Hole> getHoles()
         {
@@ -114,7 +115,7 @@ namespace MemoryAllocation
             int allocatedSize = p.getSize();
             foreach (var hole in SortedList)
             {
-                if (allocatedSize <= hole.getSpace() && hole.getNumber() > 0)
+                if (allocatedSize <= hole.getSpace() && hole.getNumber() >= 0)
                 {
                     bool valid = hole.placeFirstFit(p);
                     if (valid)
@@ -140,6 +141,30 @@ namespace MemoryAllocation
                 if (allocatedSize <= hole.getSpace()&& hole.getNumber()>=0)
                 {
                     bool valid = hole.placeBestFit(p);
+                    if (valid)
+                    {
+                        return true;
+                    }
+                }
+            }
+            waitingProcesses.AddFirst(p);
+            return false;
+        }
+        public bool worstFit(Process p)
+        {
+            List<Hole> SortedList = holes.OrderBy(o => o.getSmallestSpace()).ToList();
+            SortedList.Sort(delegate (Hole c1, Hole c2) {
+                if (c1.getSmallestSpace() == c2.getSmallestSpace())
+                    return c2.getStarting().CompareTo(c1.getStarting());
+                return c1.getSmallestSpace().CompareTo(c2.getSmallestSpace());
+            });
+            SortedList.Reverse();
+            int allocatedSize = p.getSize();
+            foreach (var hole in SortedList)
+            {
+                if (allocatedSize <= hole.getSpace() && hole.getNumber() >= 0)
+                {
+                    bool valid = hole.placeWorstFit(p);
                     if (valid)
                     {
                         return true;
@@ -183,7 +208,7 @@ namespace MemoryAllocation
                 if(hole.getNumber()>=0)
                 {
                     hole.setStarting(hole.getStarting() - shifting);
-                    shifting += hole.compactHole();
+                    shifting += hole.compactHole(shifting);
                     totalfree = shifting;
                     finish = hole.getStarting() + hole.getSize();
                 }

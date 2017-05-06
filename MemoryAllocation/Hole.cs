@@ -148,10 +148,43 @@ namespace MemoryAllocation
             updateSamllestFreeSpace();
             return false;
         }
+        public bool placeWorstFit(Process p)
+        {
+            List<Process> SortedList = processes.OrderBy(o => o.getSize()).ToList();
+            SortedList.Sort(delegate (Process c1, Process c2) {
+                if (c1.getSize() == c2.getSize())
+                    return c1.getStarting().CompareTo(c2.getStarting());
+                return c1.getSize().CompareTo(c2.getSize());
+            });
+            SortedList.Reverse();
+            foreach (var process in SortedList)
+            {
+                if (process.getNumber().Equals("free") && process.getSize() >= p.getSize())
+                {
+                    p.setStarting(process.getStarting());
+                    int difference = process.getSize() - p.getSize();
+                    p.setHole(this);
+                    processes.AddFirst(p);
+                    if (difference > 0)
+                    {
+                        Process temp = new Process("free", difference);
+                        temp.setStarting(p.getStarting() + p.getSize());
+                        processes.AddFirst(temp);
+                    }
+                    processes.Remove(process);
+                    updateFreeSpace();
+                    updateSamllestFreeSpace();
+                    return true;
+                }
+            }
+            updateFreeSpace();
+            updateSamllestFreeSpace();
+            return false;
+        }
         private void updateFreeSpace()
         {
             List<Process> SortedList = processes.OrderByDescending(o => o.getSize()).ToList();
-            foreach (var Process in processes)
+            foreach (var Process in SortedList)
             {
                 if(Process.getNumber().Equals("free"))
                 {
@@ -164,7 +197,7 @@ namespace MemoryAllocation
         private void updateSamllestFreeSpace()
         {
             List<Process> SortedList = processes.OrderBy(o => o.getSize()).ToList();
-            foreach (var Process in processes)
+            foreach (var Process in SortedList)
             {
                 if (Process.getNumber().Equals("free"))
                 {
@@ -203,9 +236,9 @@ namespace MemoryAllocation
                 it.Value.setStarting(it.Value.getStarting()-x);
             }
         }
-        public int compactHole()
+        public int compactHole(int shifting)
         {
-            int shifting = 0;
+            //int shifting = 0;
             int totalFree = 0;
             List<Process> SortedList = processes.OrderBy(o => o.getStarting()).ToList();
             foreach (var process in SortedList)

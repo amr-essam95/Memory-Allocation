@@ -116,6 +116,7 @@ namespace MemoryAllocation
             memory.clear();
             list.Items.Clear();
             numberOfHoles = 0;
+            sim.ss.Clear();
         }
 
         private void save_Click(object sender, EventArgs e)

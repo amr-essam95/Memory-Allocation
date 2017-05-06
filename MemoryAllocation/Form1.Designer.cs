@@ -51,7 +51,8 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "First Fit",
-            "Best Fit"});
+            "Best Fit",
+            "Worst Fit"});
             this.comboBox1.Location = new System.Drawing.Point(185, 30);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(269, 21);

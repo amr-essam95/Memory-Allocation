@@ -14,7 +14,7 @@ namespace MemoryAllocation
     {
         Form mainform;
         Memory memory;
-        List<string> ss = new List<string>();
+        public List<string> ss = new List<string>();
         int y_point = 300;
         public Simulation()
         {
@@ -91,28 +91,29 @@ namespace MemoryAllocation
                     MessageBox.Show("There is a process with this number.");
                     return;
                 }
-                ss.Add(number.Text);
+                
                 Process temp = new Process(number.Text,s);
-                memory.addProcess(temp);
-                //String[] row = { temp.getNumber(),temp.getSize().ToString() };
-                //var listItemView = new ListViewItem(row);
-                //list.Items.Add(listItemView);
-                UpdateList(memory.getProcesses());
                 bool valid;
-                if(memory.getAlgorithm().Equals("First Fit"))
+                if (memory.getAlgorithm().Equals("First Fit"))
                 {
                     valid = memory.firstFit(temp);
                 }
-                else
+                else if (memory.getAlgorithm().Equals("Best Fit"))
                 {
                     valid = memory.bestFit(temp);
                 }
+                else
+                {
+                    valid = memory.worstFit(temp);
+                }
                 if(!valid)
                 {
-                    MessageBox.Show("This process is in the waiting queue.\nAfter process is deallocated it'll be allocated");
+                    MessageBox.Show("No enough memory");
                     return;
                 }
-
+                ss.Add(number.Text);
+                memory.addProcess(temp);
+                UpdateList(memory.getProcesses());
                 drawMemory();
                 mainform.VerticalScroll.Value = mainform.VerticalScroll.Maximum;
             }

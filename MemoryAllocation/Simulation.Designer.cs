@@ -70,17 +70,17 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(145, 157);
+            this.button1.Location = new System.Drawing.Point(26, 157);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(167, 23);
+            this.button1.Size = new System.Drawing.Size(286, 23);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Return to Holes Section";
+            this.button1.Text = "Return to Holes Entering Section";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // allocate
             // 
-            this.allocate.Location = new System.Drawing.Point(145, 128);
+            this.allocate.Location = new System.Drawing.Point(26, 128);
             this.allocate.Name = "allocate";
             this.allocate.Size = new System.Drawing.Size(75, 23);
             this.allocate.TabIndex = 2;
