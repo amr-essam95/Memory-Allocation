@@ -11,6 +11,7 @@ namespace MemoryAllocation
         LinkedList<Hole> holes = new LinkedList<Hole>();
         LinkedList<Process> processes = new LinkedList<Process>();
         LinkedList<Process> waitingProcesses = new LinkedList<Process>();
+        Boolean compaction = false;
         String algorithm = "First Fit";
         public Memory()
         { }
@@ -21,6 +22,14 @@ namespace MemoryAllocation
         public void setAlgorithm(String alg)
         {
             algorithm = alg;
+        }
+        public void setCompaction(Boolean x)
+        {
+            compaction = x;
+        }
+        public Boolean getCompaction()
+        {
+            return compaction;
         }
         public LinkedList<Process> getProcesses()
         {

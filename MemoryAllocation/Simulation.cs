@@ -130,6 +130,8 @@ namespace MemoryAllocation
                 memory.deallocate(removed);
                 ss.Remove(number.Text);
                 UpdateList(memory.getProcesses());
+                if(memory.getCompaction())
+                    memory.compact();
                 drawMemory();
             }
         }
@@ -173,7 +175,8 @@ namespace MemoryAllocation
                 }
             }
             y_point += 80;
-            memoryPanel.MaximumSize = new Size(10000,10000);
+            memoryPanel.MaximumSize = new Size(10000,memoryPanel.Height);
+            memoryPanel.Size = new Size(memoryPanel.Width, memoryPanel.Height);
             
         }
 
@@ -186,8 +189,7 @@ namespace MemoryAllocation
 
         private void compact_Click(object sender, EventArgs e)
         {
-            memory.compact();
-            drawMemory();
+            
         }
 
         private void button2_Click(object sender, EventArgs e)

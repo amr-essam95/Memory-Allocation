@@ -21,6 +21,7 @@ namespace MemoryAllocation
             initializeList();
             comboBox1.SelectedIndex = 1;
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            compact.SelectedIndex = 0;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
         }
@@ -43,9 +44,13 @@ namespace MemoryAllocation
             list.Items.Clear();
             for (LinkedListNode<Hole> temp = x.First; temp != null; temp = temp.Next)
             {
-                String[] row = { temp.Value.getNumber().ToString(), temp.Value.getStarting().ToString() ,temp.Value.getSize().ToString()};
-                var listItemView = new ListViewItem(row);
-                list.Items.Add(listItemView);
+                if (temp.Value.getNumber() >= 0)
+                {
+                    String[] row = { temp.Value.getNumber().ToString(), temp.Value.getStarting().ToString(), temp.Value.getSize().ToString() };
+                    var listItemView = new ListViewItem(row);
+                    list.Items.Add(listItemView);
+                }
+                
             }
         }
 
@@ -123,9 +128,14 @@ namespace MemoryAllocation
                 MessageBox.Show("No holes are available. \nplease enter at least one hole.");
                 return;
             }
+            if (compact.Text.Equals("Compact With Deallocation"))
+                memory.setCompaction(true);
+            else
+                memory.setCompaction(false);
             memory.setAlgorithm(comboBox1.Text);
             memory.fillGaps();
             sim.Show();
+            sim.UpdateList(memory.getProcesses());
             this.Hide();
             sim.drawMemory();
         }
