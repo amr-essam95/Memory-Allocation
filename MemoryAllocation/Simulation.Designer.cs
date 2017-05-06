@@ -37,7 +37,6 @@
             this.labelSize = new System.Windows.Forms.Label();
             this.lableNumber = new System.Windows.Forms.Label();
             this.list = new System.Windows.Forms.ListView();
-            this.memoryPanel = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,21 +129,12 @@
             this.list.UseCompatibleStateImageBehavior = false;
             this.list.View = System.Windows.Forms.View.Details;
             // 
-            // memoryPanel
-            // 
-            this.memoryPanel.AutoScroll = true;
-            this.memoryPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.memoryPanel.Location = new System.Drawing.Point(65, 289);
-            this.memoryPanel.Name = "memoryPanel";
-            this.memoryPanel.Size = new System.Drawing.Size(1195, 360);
-            this.memoryPanel.TabIndex = 3;
-            // 
             // Simulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1284, 661);
-            this.Controls.Add(this.memoryPanel);
             this.Controls.Add(this.list);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
@@ -168,7 +158,6 @@
         private System.Windows.Forms.Label labelSize;
         private System.Windows.Forms.Label lableNumber;
         private System.Windows.Forms.ListView list;
-        private System.Windows.Forms.Panel memoryPanel;
         private System.Windows.Forms.Button button1;
     }
 }

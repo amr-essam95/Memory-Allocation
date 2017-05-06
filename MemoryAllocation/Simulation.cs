@@ -15,7 +15,7 @@ namespace MemoryAllocation
         Form mainform;
         Memory memory;
         List<string> ss = new List<string>();
-        int y_point = 20;
+        int y_point = 300;
         public Simulation()
         {
             InitializeComponent();
@@ -113,7 +113,8 @@ namespace MemoryAllocation
                     return;
                 }
 
-                drawMemory();  
+                drawMemory();
+                mainform.VerticalScroll.Value = mainform.VerticalScroll.Maximum;
             }
             else
             {
@@ -168,16 +169,17 @@ namespace MemoryAllocation
                     label2.MaximumSize = new Size(30, 20);
                     label2.Margin = new Padding(0, 0, 0, 0);
                     label2.Location = new Point(x_point+process.getSize()*var-5, y_point+40);
-                    memoryPanel.Controls.Add(temp);
-                    memoryPanel.Controls.Add(label1);
-                    memoryPanel.Controls.Add(label2);
+                    this.Controls.Add(temp);
+                    this.Controls.Add(label1);
+                    this.Controls.Add(label2);
                     x_point += process.getSize()*var;
                 }
             }
-            y_point += 80;
-            memoryPanel.MaximumSize = new Size(10000,memoryPanel.Height);
-            memoryPanel.Size = new Size(memoryPanel.Width, memoryPanel.Height);
-            
+            y_point += 100;
+            //memoryPanel.MaximumSize = new Size(10000,memoryPanel.Height);
+            //memoryPanel.Size = new Size(memoryPanel.Width, memoryPanel.Height);
+            //memoryPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
